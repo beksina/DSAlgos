@@ -9,20 +9,39 @@
 # dfs & keep track of ROW and COL to find greatest COL
 # pos => row: [col, val]
 
+# optimized version
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if root is None:
             return []
-        pos = {}
-        def dfs(node, r, c):
-            pos[r] = [c, node.val]
-            if node.left:
-                dfs(node.left, r + 1, c - 1)
-            if node.right:
-                dfs(node.right, r + 1, c + 1)
-        dfs(root, 0, 0)
         res = []
-        for c in pos:
-            res.append(pos[c][1])
+        def dfs(node, r):
+            if r == len(res):
+                res.append(node.val)
+            else:
+                res[r] = node.val
+            if node.left:
+                dfs(node.left, r + 1)
+            if node.right:
+                dfs(node.right, r + 1)
+        dfs(root, 0)
         return res
+        
+
+# class Solution:
+#     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+#         if root is None:
+#             return []
+#         pos = {}
+#         def dfs(node, r, c):
+#             pos[r] = [c, node.val]
+#             if node.left:
+#                 dfs(node.left, r + 1, c - 1)
+#             if node.right:
+#                 dfs(node.right, r + 1, c + 1)
+#         dfs(root, 0, 0)
+#         res = []
+#         for c in pos:
+#             res.append(pos[c][1])
+#         return res
         
