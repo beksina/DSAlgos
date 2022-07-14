@@ -4,20 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if root is None:
             return []
-        levels = {}
+        levels = []
         def dfs(n, r):
-            if r in levels:
-                levels[r].append(n.val)
+            if r == len(levels):
+                levels.append([n.val])
             else:
-                levels[r] = [n.val]
+                levels[r].append(n.val)
             if n.left:
                 dfs(n.left, r + 1)
             if n.right:
                 dfs(n.right, r + 1)
         dfs(root, 0)
-        return levels.values()
+        return levels
             
