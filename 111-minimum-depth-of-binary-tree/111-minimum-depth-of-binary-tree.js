@@ -11,6 +11,22 @@
  * @return {number}
  */
 
+// BFS
+function minDepth(root) {
+    if (root === null) return 0;
+    let currDepth = 1;
+    let q = [[root, currDepth]];
+    while (q.length) {
+        let [node, depth] = q.shift();
+        if (!node.left && !node.right) return depth;
+        if (node.left) q.push([node.left, depth + 1]);
+        if (node.right) q.push([node.right, depth + 1]);
+    }
+}
+
+/*
+DFS
+
 function minDepth(root) {
     if (root === null) return 0;
     let min = Infinity;
@@ -26,3 +42,4 @@ function minDepth(root) {
     dfs(root, 1);
     return min;
 };
+*/
