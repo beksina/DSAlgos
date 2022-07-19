@@ -11,6 +11,35 @@
  * @return {number[][]}
  */
 
+// BFS
+function verticalOrder(root) {
+    if (root === null) return [];
+    const pos = {};
+    let q = [[root, 0]];
+    
+    while (q.length) {
+        let [n, c] = q.shift();
+        if (c in pos) {
+            pos[c].push(n.val)
+        } else {
+            pos[c] = [n.val]
+        }
+        if (n.left) q.push([n.left, c - 1]);
+        if (n.right) q.push([n.right, c + 1]);
+    }
+    
+    const res = [];
+    const cols = Object.keys(pos).sort((a,b) => a - b);
+    for (let c of cols) {
+        res.push(pos[c]);
+    }
+    return res;
+}
+
+
+/* 
+DFS 
+
 function verticalOrder(root) {
     if (root === null) return []
     const pos = {};
@@ -44,4 +73,5 @@ function verticalOrder(root) {
     return res;
 };
 
+*/
 
