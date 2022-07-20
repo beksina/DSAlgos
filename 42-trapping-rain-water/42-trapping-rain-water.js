@@ -2,27 +2,24 @@
  * @param {number[]} height
  * @return {number}
  */
+
 var trap = function(height) {
-    let left = 0;
-    let right = height.length - 1;
-    let maxLeft = height[left];
-    let maxRight = height[right];
-    let total = 0;
-    while (left < right) {
+    let maxLeft = height[0];
+    let maxRight = height[height.length - 1];
+    let l = 0;
+    let r = height.length - 1;
+    let res = 0;
+    
+    while (l < r) {
         if (maxLeft < maxRight) {
-            left++;
-            maxLeft = Math.max(maxLeft, height[left]);
-            total += maxLeft - height[left];
+            l++;
+            maxLeft = Math.max(maxLeft, height[l]);
+            res += maxLeft - height[l];
         } else {
-            right--;
-            maxRight = Math.max(maxRight, height[right]);
-            total += maxRight - height[right];
+            r--;
+            maxRight = Math.max(maxRight, height[r]);
+            res += maxRight - height[r];
         }
     }
-    return total;
+    return res;
 };
-
-
-/*
-two pointers from left to right
-*/
