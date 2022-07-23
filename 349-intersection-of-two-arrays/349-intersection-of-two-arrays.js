@@ -5,25 +5,13 @@
  */
 
 var intersection = function(nums1, nums2) {
-    const smaller = nums1.length < nums2.length ? nums1 : nums2;
-    const bigger = smaller == nums1 ? nums2 : nums1;
+    const setOne = new Set(nums1);
+    const setTwo = new Set(nums2);
+    const res = new Set();
     
-    const smTrack = {};
-    const bgTrack = {};
-    
-    for (let i = 0; i < smaller.length; i++) {
-        smTrack[smaller[i]] = true;
+    for (let n of setOne) {
+        if (setTwo.has(n)) res.add(n);
     }
     
-    for (let i = 0; i < bigger.length; i++) {
-        bgTrack[bigger[i]] = true;
-    }
-    
-    const res = [];
-    for (let bg in bgTrack) {
-        if (bg in smTrack) {
-            res.push(bg);
-        }
-    }
-    return res;
+    return Array.from(res);
 };
